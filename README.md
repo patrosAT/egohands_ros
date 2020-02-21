@@ -2,8 +2,8 @@
 
 This is a ROS implementation of the CSAILVision Semantic Segmentation/Scene Parsing framework / Pyramid Scene Parsing Network (PSPNet) retrained on the egohands dataset. Despite being trained on human hands, the NN detects human skin in general.
 
-**Input:** RGB image: [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html)
-**Output:** Mask: [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html) indicating the bodyparts (0 for background, 1 for human skin)
+* **Input:** RGB image: [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html)
+* **Output:** Mask: [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html) indicating the bodyparts (0 for background, 1 for human skin)
 
 ## Getting Started
 
@@ -57,5 +57,5 @@ The egohands dataset training has been done as part of a [student's project](htt
 
 ## License
 
-**Academic:** The project is licensed under the 3-clause BSD License.
-**Commercial:** Please contact the author.
+* **Academic:** The project is licensed under the 3-clause BSD License.
+* **Commercial:** Please contact the author.
