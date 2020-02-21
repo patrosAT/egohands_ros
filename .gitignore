@@ -1,0 +1,5 @@
+.python-version
+__pycache__
+*.pyc
+*epoch_30.pth
+#CATKIN_IGNORE

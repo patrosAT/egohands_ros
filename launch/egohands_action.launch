@@ -1,0 +1,4 @@
+<launch>
+  <rosparam command="load" file="$(find egohands_ros)/cfg/egohands.yaml" />
+  <node name="egohands_action" pkg="egohands_ros" type="egohands_action.py" output="screen" />
+</launch>

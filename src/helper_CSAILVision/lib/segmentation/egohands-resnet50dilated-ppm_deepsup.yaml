@@ -1,0 +1,19 @@
+DATASET:
+  list_test: "./testing.odgt"
+  num_class: 2
+  imgSizes: (600,)
+  imgMaxSize: 700
+  padding_constant: 8
+  segm_downsampling_rate: 8
+  random_flip: True
+
+MODEL:
+  arch_encoder: "resnet50dilated"
+  arch_decoder: "ppm_deepsup"
+  fc_dim: 2048
+
+TEST:
+  checkpoint: "epoch_30.pth"
+  result: "./results/egohands-resnet50dilated-ppm_deepsup"
+
+DIR: "ckpt/egohands-resnet50dilated-ppm_deepsup"
