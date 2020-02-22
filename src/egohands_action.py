@@ -18,12 +18,11 @@ class Egohands:
         # Parameter
         self.cam_rgb = rospy.get_param('/egohands/camera/rgb')
         self.interface = rospy.get_param('/egohands/interface/action')
-        self.cpu = rospy.get_param('/egohands/gpu')
 
         # Init
         self.bridge = cv_bridge.CvBridge()
         self.segmentation_module = module_init()
-        torch.cuda.set_device(self.cpu)
+        torch.cuda.set_device(0)
 
         # Action server
         self.server = actionlib.SimpleActionServer(self.interface, SemSegHandActAction, self._callback, False)

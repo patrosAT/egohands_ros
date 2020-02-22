@@ -41,13 +41,13 @@ class SyncTestCase(TorchTestCase):
             bn2.weight.data.copy_(bn1.weight.data)
             bn2.bias.data.copy_(bn1.bias.data)
 
-    def _checkBatchNormResult(self, bn1, bn2, input, is_train, cuda=False):
+    def _checkBatchNormResult(self, bn1, bn2, input, is_train, cuda=True):
         """Check the forward and backward for the customized batch normalization."""
         bn1.train(mode=is_train)
         bn2.train(mode=is_train)
 
         if cuda:
-            input = input.cuda()
+            input = input.cuda(0)
 
         self._syncParameters(_find_bn(bn1), _find_bn(bn2))
 
@@ -81,8 +81,8 @@ class SyncTestCase(TorchTestCase):
         sync_bn = SynchronizedBatchNorm1d(10, eps=1e-5, affine=False)
         sync_bn = DataParallelWithCallback(sync_bn, device_ids=[0, 1])
 
-        bn.cuda()
-        sync_bn.cuda()
+        bn.cuda(0)
+        sync_bn.cuda(0)
 
         self._checkBatchNormResult(bn, sync_bn, torch.rand(16, 10), True, cuda=True)
 
@@ -91,8 +91,8 @@ class SyncTestCase(TorchTestCase):
         sync_bn = SynchronizedBatchNorm1d(10, eps=1e-5, affine=False)
         sync_bn = DataParallelWithCallback(sync_bn, device_ids=[0, 1])
 
-        bn.cuda()
-        sync_bn.cuda()
+        bn.cuda(0)
+        sync_bn.cuda(0)
 
         self._checkBatchNormResult(bn, sync_bn, torch.rand(16, 10), False, cuda=True)
 
@@ -101,8 +101,8 @@ class SyncTestCase(TorchTestCase):
         sync_bn = SynchronizedBatchNorm2d(10)
         sync_bn = DataParallelWithCallback(sync_bn, device_ids=[0, 1])
 
-        bn.cuda()
-        sync_bn.cuda()
+        bn.cuda(0)
+        sync_bn.cuda(0)
 
         self._checkBatchNormResult(bn, sync_bn, torch.rand(16, 10, 16, 16), True, cuda=True)
 

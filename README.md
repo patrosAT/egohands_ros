@@ -9,7 +9,7 @@ This is a ROS implementation of the CSAILVision Semantic Segmentation/Scene Pars
 
 ### Dependencies
 
-Running the node requires a gpu. The model have been tested with Python 3.6.
+Running the node requires a gpu. The model have been tested with Python 2.7 and 3.6.
  
 #### Python3 / pip3
 ```
@@ -33,6 +33,13 @@ cv_bridge
 
 Download the weights from [Google Drive](https://drive.google.com/drive/u/1/folders/1q--u3g9XgQ0qH1I6JJfCs3EfTMc3t1IT) and place them in [/src/helper_CSAILVision/lib/segmentation](/src/helper_CSAILVision/lib/segmentation/).
 
+### Bilding
+
+To maximize performance, use the 'release' build mode>
+```
+catkin_make -DCMAKE_BUILD_TYPE=Release
+```
+
 ### Configuration
 
 The initial setup can be changed by adapting the [egohands.yaml](cfg/egohands.yaml) file:
@@ -40,7 +47,6 @@ The initial setup can be changed by adapting the [egohands.yaml](cfg/egohands.ya
 * **topic:** Topic the publisher node is publishing to.
 * **service:** Topic the service node is subcribing & publishing to.
 * **action:** Topic the action node is subcribing & publishing to.
-* **gpu:** Number of the gpu.
 
 ### Launch
 

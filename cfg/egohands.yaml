@@ -5,4 +5,3 @@ egohands:
         topic: /egoahnds/topic
         service: /egoahnds/service
         action: /egoahnds/action
-    gpu: 0

@@ -26,7 +26,7 @@ def img_transform(img):
 def hand_segmentation(frame, segmentation_module, save=False):
     # Convert to torch.Tensor
     frame_tensor = img_transform(frame)
-    frame_tensor = torch.unsqueeze(frame_tensor, 0).cuda()
+    frame_tensor = torch.unsqueeze(frame_tensor, 0).cuda(0)
 
     # Get sizes
     segSize = (as_numpy(frame).shape[0], as_numpy(frame).shape[1])
@@ -63,7 +63,7 @@ def module_init():
     # NLLLoss
     crit = nn.NLLLoss(ignore_index=-1)
     # Instantiate segmentation module
-    segmentation_module = SegmentationModule(net_encoder, net_decoder, crit).cuda()
+    segmentation_module = SegmentationModule(net_encoder, net_decoder, crit).cuda(0)
     # Evaluation mode
     segmentation_module.eval()
 
