@@ -35,7 +35,7 @@ Download the weights from [Google Drive](https://drive.google.com/drive/u/1/fold
 
 ### Bilding
 
-To maximize performance, use the 'release' build mode>
+*Optional:* To maximize performance, use the 'release' build mode:
 ```
 catkin_make -DCMAKE_BUILD_TYPE=Release
 ```

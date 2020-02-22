@@ -2,6 +2,6 @@ egohands:
     camera:
         rgb: /camera/color/image_raw/compressed
     interface:
-        topic: /egoahnds/topic
-        service: /egoahnds/service
-        action: /egoahnds/action
+        topic: /egohands/topic
+        service: /egohands/service
+        action: /egohands/action
