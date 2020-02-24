@@ -1,5 +1,6 @@
 .python-version
 __pycache__
+_test
 *.pyc
 *epoch_30.pth
 #CATKIN_IGNORE

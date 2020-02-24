@@ -1,7 +1,10 @@
 egohands:
     camera:
-        rgb: /camera/color/image_raw/compressed
+        topic: /camera/color/image_raw/compressed
     interface:
         topic: /egohands/topic
         service: /egohands/service
         action: /egohands/action
+    visualization: 
+        topic: /egohands/visualization
+        activated: True
