@@ -60,7 +60,7 @@ class Egohands:
         
         # Publish results
         print('Body detection successful. Current Hz-rate:\t' + str(1/(rospy.get_time() - t_start)))
-        self.server.set_succeeded(SemSegHandActResult(mask=self.bridge.cv2_to_compressed_imgmsg(mask)))
+        self.server.set_succeeded(SemSegHandActResult(mask=self.bridge.cv2_to_compressed_imgmsg(mask, dst_format='png')))
 
 
 if __name__ == '__main__':
