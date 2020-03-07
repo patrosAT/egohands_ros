@@ -85,5 +85,5 @@ The egohands dataset training has been done as part of a [student's project](htt
 
 ## License
 
-* **Academic:** This project is licensed under the 3-clause BSD License.
-* **Commercial:** This project is licensed under the 3-clause BSD License. The underlying resouced might use different licence models. Contanct the respective authors for more information.
+* **Academic:** This project is licensed under the 4-clause BSD License.
+* **Commercial:** Please contact the author.
