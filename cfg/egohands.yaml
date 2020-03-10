@@ -7,4 +7,4 @@ egohands:
         action: /egohands/action
     visualization: 
         topic: /egohands/visualization
-        activated: True
+        activated: False
