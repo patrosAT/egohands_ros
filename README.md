@@ -1,89 +1,79 @@
-# ROS node for real-time egohands detection #
+# ROS node for real-time (human) skin detection #
 
-This is a ROS implementation of the CSAILVision Semantic Segmentation/Scene Parsing framework / Pyramid Scene Parsing Network (PSPNet) retrained on the egohands dataset. Despite being trained on human hands, the NN detects human skin in general.
+This is a ROS implementation of the [CSAILVision Semantic Segmentation/Scene Parsing framework (PSPNet)](https://github.com/CSAILVision/semantic-segmentation-pytorch) retrained on the egohands dataset. The NN is capable of detecting human skin with a mean intersection-over-union (IoU) score of 0.833.
 
-#### Input ####
+This node is part of a larger project with the objective to enable object-independent human-to-robot handovers using robotic vision. The code for this project can be found [here](https://github.com/patrosAT/human_robot_handover_ros).
 
-**RGB compressed image:** [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html)
+The node can be implemented as publisher, service, or action. See below for more inforamtion.
 
-#### Output ####
+* **Input:** RGB image: [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html)
+* **Output:** Mask (0 background, 1 human skin): [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html)
 
-**Compressed mask:** [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html) (0 indicates background, 1 for human skin)
+#### Example from a frontal perspective (full body): ####
+<div style="text-align:center"><img src="./imgs/handFront.png" width="500"/></div>
+
+#### Example from a lateral perspective (arm and hand only): ####
+<div style="text-align:center"><img src="./imgs/handSide.png" width="500"/></div>
+
 
 ## Getting Started ##
 
-### Dependencies ###
+The code have been tested with Python 3.6.
 
-Running the node requires a gpu. The model have been tested with Python 2.7 and 3.6.
- 
-#### Hardware ####
+For using the pre-trained NN, the weights need to be downloaded from [Google Drive](https://drive.google.com/open?id=11kLgzLdFPy3yl03X6lBetebDpU5wLMQv) and placed in [/src/helper_CSAILVision/lib/segmentation/](/src/helper_CSAILVision/lib/segmentation/).
 
-* RGBD Camera
-* GPU >= 4000MiB
 
-#### Python3 / pip3 ####
-```
-numpy
-scipy
-cv2
-torch, torchvision
-PIL
-yacs
-tqdm
-```
-#### Ros ####
-```
-rospy
-actionlib
-sensor_msgs
-cv_bridge
-ros_numpyros_numpyros_numpy
-```
+### Hardware ###
 
-### Weights ###
+* RGB camera *(for this project an [realsense D435](https://www.intelrealsense.com/depth-camera-d435/) was used)*
+* GPU >= 4 GB
 
-Download the weights from [Google Drive](https://drive.google.com/drive/u/1/folders/1q--u3g9XgQ0qH1I6JJfCs3EfTMc3t1IT) and place them in [/src/helper_CSAILVision/lib/segmentation](/src/helper_CSAILVision/lib/segmentation/).
 
-### Bilding ###
+### Software ###
 
-*Optional:* To maximize performance, use the 'release' build mode:
-```
-catkin_make -DCMAKE_BUILD_TYPE=Release
-```
+**ATTENTION: This package requires the [ROS](https://www.ros.org/) operating system!**
 
-### Configuration
+* Python 2.x: see [requirements.txt](requirements.txt)
+* Python 3.x: see [requirements3.txt](requirements3.txt)
 
-The initial setup can be changed by adapting the [egohands.yaml](cfg/egohands.yaml) file:
 
-#### Camera ####
-* **topic:** Rostopic the publisher node is subcribing to.
+### Launch ###
 
-#### Interfaces ####
-* **topic:** Rostopic the publisher node is publishing to *(please do not change)*.
-* **service:** Rosservice for interacting with the service node *(please do not change)*.
-* **action:** Rostopic for interacting with the action node *(please do not change)*.
+The ros package contains 3 launch files: publisher, service an action. 
 
-#### Visualization ####
+* **[Publisher](launch/egohands_publisher.launch):** Publishes a mask every time a new image is published by the camera.
+* **[Serivce](launch/egohands_service.launch):** Returns a mask upon service call.
+* **[Action](launch/egohands_action.launch):** Returns a mask upon client call.
 
-The visualization mode published the original image with the background blacked out. Please be aware that turing on the visualization increases computing time and network utilization substantially.
+The input/output is identical for a all three nodes:
+* **Input:** RGB image: [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html)
+* **Output:** Mask (0 background, 1 skin): [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html)
 
-* **topic:** Topic the node is publishing to.
-* **activated:** Turn on/off visualization: *use keywords "on" or "off"*.
 
-### Launch
+## Configuration ##
 
-The ros package contains 3 launch files:
-* **Publisher:** The [publisher](launch/egohands_publisher.launch) launch file starts a ros node that published a new mask every time a new rgb image is published.
-* **Serivce:** The [serivce](launch/egohands_service.launch) launch file starts a ros service. 
-* **Action:** The [action](launch/egohands_action.launch) launch file starts a ros action server.
+The initial configuration can be changed by adapting the [bodyparts.yaml](cfg/bodyparts.yaml) file:
 
-## Acknowledgments
+**Camera:** 
+* **topic:** Rostopic the publisher is subscribing to. Altering this config has no impact on the service and action nodes.
 
-The ROS node is powered by the Pyramid Scene Parsing Network (PSPNet) of [CSAILVision](https://github.com/CSAILVision/semantic-segmentation-pytorch).
+**Interfaces:**
+* **topic:** Rostopic the publisher node is publishing to.
+* **service:** Rosservice for interacting with the service node.
+* **action:** Rostopic for interacting with the action node.
 
-The egohands dataset training has been done as part of a [student's project](https://github.com/junwenkwan/hand-seg-tpv) at [University Monash](https://www.monash.edu/)
+**Visualization:** The visualization mode published a color-inverted copy (BGR) of the original RGB image with the background blacked out. Please be aware that turing on the visualization increases computing time and network utilization substantially.
 
-## License
+* **topic:** Rostopic the node is publishing to.
+* **activated:** Turn on/off visualization: *use only keywords **"True"** or **"False"***
 
-* **Academic:** This project is licensed under the 4-clause BSD License.
-* **Commercial:** Please contact the author.
+
+## Acknowledgments ##
+
+The ROS node is powered by the Pyramid Scene Parsing Network (PSPNet) of [CSAILVision](https://github.com/CSAILVision/semantic-segmentation-pytorch). The AI training with the egohands dataset was part of a [student's project](https://github.com/junwenkwan/hand-seg-tpv) at [University Monash](https://www.monash.edu/)
+
+
+## License ##
+
+This project is licensed under the 4-clause BSD License.
+
