@@ -22,20 +22,16 @@ The code have been tested with Python 3.6.
 
 For using the pre-trained NN, the weights need to be downloaded from [Google Drive](https://drive.google.com/open?id=11kLgzLdFPy3yl03X6lBetebDpU5wLMQv) and placed in [/src/helper_CSAILVision/lib/segmentation/](/src/helper_CSAILVision/lib/segmentation/).
 
-
 ### Hardware ###
 
 * RGB camera *(for this project an [realsense D435](https://www.intelrealsense.com/depth-camera-d435/) was used)*
 * GPU >= 4 GB
 
-
 ### Software ###
 
 **ATTENTION: This package requires the [ROS](https://www.ros.org/) operating system!**
 
-* Python 2.x: see [requirements.txt](requirements.txt)
 * Python 3.x: see [requirements3.txt](requirements3.txt)
-
 
 ### Launch ###
 
@@ -62,9 +58,9 @@ The initial configuration can be changed by adapting the [bodyparts.yaml](cfg/bo
 * **service:** Rosservice for interacting with the service node.
 * **action:** Rostopic for interacting with the action node.
 
-**Visualization:** The visualization mode published a color-inverted copy (BGR) of the original RGB image with the background blacked out. Please be aware that turing on the visualization increases computing time and network utilization substantially.
+**Visualization:** The visualization mode publishes a color-inverted copy (BGR) of the original RGB image with the background blacked out. Please be aware that turing on the visualization increases computing time and network utilization substantially.
 
-* **topic:** Rostopic the node is publishing to.
+* **topic:** Rostopic the node is publishing to (visualization).
 * **activated:** Turn on/off visualization: *use only keywords **"True"** or **"False"***
 
 
