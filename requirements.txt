@@ -1,0 +1,10 @@
+numpy
+opencv-contrib-python
+opencv-python
+Pillow
+pkg-resources
+PyYAML
+six
+torch
+torchvision
+yacs
