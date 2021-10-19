@@ -9,10 +9,10 @@ The node can be implemented as publisher, service, or action. See below for more
 * **Input:** RGB image: [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html)
 * **Output:** Mask (0 background, 1 human skin): [sensor_msgs/CompressedImage](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CompressedImage.html)
 
-#### Example from a frontal perspective (full body): ####
+#### Example from a frontal perspective of two hands holding a whiteboard eraser (full body): ####
 <img src="./imgs/handFront.png" width="500"/>
 
-#### Example from a lateral perspective (arm and hand only): ####
+#### Example from a lateral perspective of a whiteboard eraser laying flat on a hand (arm and hand only): ####
 <img src="./imgs/handSide.png" width="500"/>
 
 
