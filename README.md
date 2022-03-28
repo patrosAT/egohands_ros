@@ -20,7 +20,7 @@ The node can be implemented as publisher, service, or action. See below for more
 
 The code have been tested with Python 3.6.
 
-For using the pre-trained NN, the weights need to be downloaded from [Google Drive](https://drive.google.com/open?id=11kLgzLdFPy3yl03X6lBetebDpU5wLMQv) and placed in the folder **" */src/helper_CSAILVision/lib/segmentation/* "**.
+For using the pre-trained NN, the weights need to be downloaded from [Google Drive](https://drive.google.com/drive/folders/1rWwpTQYsNZt6GBhMI1_riu8uvg49pKJH) and placed in the folder **" */src/helper_CSAILVision/lib/segmentation/* "**.
 
 ### Hardware Requirements ###
 
